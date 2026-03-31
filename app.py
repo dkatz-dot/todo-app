@@ -54,6 +54,15 @@ def done(idx):
     return redirect(url_for("index"))
 
 
+@app.route("/priority/<int:idx>", methods=["POST"])
+def priority(idx):
+    new_priority = request.form.get("priority", "medium")
+    if new_priority in PRIORITIES:
+        with get_db() as conn:
+            conn.execute("UPDATE todos SET priority = ? WHERE id = ?", (new_priority, idx))
+    return redirect(url_for("index"))
+
+
 @app.route("/delete/<int:idx>", methods=["POST"])
 def delete(idx):
     with get_db() as conn:

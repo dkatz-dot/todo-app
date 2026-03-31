@@ -199,6 +199,16 @@
     .btn-delete { background: #fed7d7; color: #9b2c2c; }
     .btn-delete:hover { background: #feb2b2; }
 
+    .priority-form select {
+      padding: 4px 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      background: white;
+      cursor: pointer;
+    }
+    .priority-form select:focus { outline: none; border-color: #888; }
+
     .empty {
       text-align: center;
       color: #aaa;
@@ -231,6 +241,13 @@
           <span class="todo-task">{{ t.task }}</span>
           <span class="priority-badge badge-{{ t.priority }}">{{ t.priority }}</span>
           <div class="actions">
+            <form class="priority-form" action="/priority/{{ t.id }}" method="POST">
+              <select name="priority" onchange="this.form.submit()">
+                <option value="high"   {% if t.priority == 'high'   %}selected{% endif %}>🔴 High</option>
+                <option value="medium" {% if t.priority == 'medium' %}selected{% endif %}>🟡 Medium</option>
+                <option value="low"    {% if t.priority == 'low'    %}selected{% endif %}>🔵 Low</option>
+              </select>
+            </form>
             <form action="/done/{{ t.id }}" method="POST">
               {% if t.done %}
                 <button class="btn btn-undone" type="submit">Undo</button>
