@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Todos</title>
+  <title>Dan's Awesome To-Do List</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800;900&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -25,10 +26,65 @@
       margin: 0 auto;
     }
 
+    @keyframes shimmer {
+      0%   { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 8px 32px rgba(252,177,23,0.4), 0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1); }
+      50%       { box-shadow: 0 12px 48px rgba(252,177,23,0.7), 0 4px 16px rgba(249,137,57,0.4), inset 0 1px 0 rgba(255,255,255,0.15); }
+    }
+
+    .title-box {
+      background: linear-gradient(135deg, #1D3F7C 0%, #2a4f96 40%, #5D67AF 100%);
+      border-top: 4px solid #FCB117;
+      border-bottom: 4px solid #F98939;
+      border-left: none;
+      border-right: none;
+      border-radius: 16px;
+      padding: 28px 32px 24px;
+      margin-bottom: 28px;
+      animation: pulse-glow 3s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .title-box::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.07) 50%, transparent 100%);
+      background-size: 400px 100%;
+      animation: shimmer 3s linear infinite;
+      border-radius: 16px;
+    }
+
+    .title-box .subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #F98939;
+      margin-bottom: 6px;
+      opacity: 0.9;
+    }
+
     h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 24px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #FCB117, #FFECCE, #F98939, #FCB117);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin: 0;
+      position: relative;
     }
 
     /* Add form */
@@ -153,7 +209,10 @@
 </head>
 <body>
   <div class="container">
-    <h1>Dan's Awesome To-Do List</h1>
+    <div class="title-box">
+      <div class="subtitle">✦ Get things done ✦</div>
+      <h1>Dan's Awesome To-Do List</h1>
+    </div>
 
     <form class="add-form" action="/add" method="POST">
       <input type="text" name="task" placeholder="What needs to be done?" autofocus required>
